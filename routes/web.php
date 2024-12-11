@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
+use App\Http\Middleware\AdminCheckMiddleware;
 use App\Http\Middleware\TestMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,7 @@ Route::get("/contact", [ContactController::class, "index"]);
 
 Route::view("/about", "about");
 
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group(function () {
 
     Route::post("/send-contact", [ContactController::class, "sendContact"]);
 
