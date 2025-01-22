@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductModel;
+use App\Repositories\HomeRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+    private $productRepo;
+
+    public function __construct()
+    {
+        $this->productRepo = new HomeRepository();
+
+    }
     public function index()
     {
         $trenutnoVrijeme = date("h:i:s");
@@ -17,8 +27,7 @@ class HomeController extends Controller
             ? 'Dobro jutro!'
             : 'Dobar dan' ;
 
-        $latestProducts = ProductModel::orderBy('id', 'desc')->take(4)->get(); // Ili moze orderByDesc('id')->take..lci
-
+        $latestProducts =  $this->productRepo->sortProducts();
 
         return view("welcome", compact('trenutnoVrijeme', 'sat', 'poruka', 'latestProducts'));
     }

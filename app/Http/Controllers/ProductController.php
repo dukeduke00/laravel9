@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveProductRequest;
 use App\Models\ProductModel;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    private $productRepo;
+
+    public function __construct()
+    {
+        $this->productRepo = new ProductRepository();
+
+    }
 
 
     public function getAllProducts()
@@ -17,23 +27,10 @@ class ProductController extends Controller
 
 
 
-    public function addProduct(Request $request)
+    public function addProduct(SaveProductRequest $request)
     {
-        $request->validate([
-            "name" => "required|string|min:3|max:25|unique:products",
-            "description" => "required|string|min:5|max:100",
-            "amount" => "required|integer|min:0",
-            "price" => "required|numeric|min:0",
-            "image" => "required|string",
-        ]);
 
-        ProductModel::create([
-            "name" => $request->get("name"),
-            "description" => $request->get("description"),
-            "amount" => $request->get("amount"),
-            "price" => $request->get("price"),
-            "image" => $request->get("image"),
-        ]);
+        $this->productRepo->createNew($request);
 
         return redirect()->route("sviProizvodi");
     }
@@ -41,7 +38,7 @@ class ProductController extends Controller
     public function delete($product)
     {
         // Select * from products where id = $product LIMIT 1 (first)
-        $singleProduct = ProductModel::where(['id' => $product])->first();
+        $singleProduct = $this->productRepo->getProductById($product);
 
 
         if($singleProduct === null)
@@ -62,38 +59,10 @@ class ProductController extends Controller
         return view('products.editProduct', compact('product'));
     }
 
-    public function update(Request $request, ProductModel $product)
+    public function update(SaveProductRequest $request, ProductModel $product)
     {
-        // Validacija podataka
-        $request->validate([
-            'name' => 'required|string|min:3|max:25',
-            'description' => 'required|string|min:5|max:100',
-            'amount' => 'required|integer|min:0',
-            'price' => 'required|numeric|min:0',
-            'image' => 'required|string',
-        ]);
 
-
-        /*
-        // Radimo update podataka
-        $singleProduct->update([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'amount' => $request->input('amount'),
-            'price' => $request->input('price'),
-            'image' => $request->input('image'),
-        ]);
-        */
-
-
-        // I jedno i drugo ispravno i istu funkciju radi
-        $product->name = $request->get('name');
-        $product->description = $request->get('description');
-        $product->amount = $request->get('amount');
-        $product->price = $request->get('price');
-        $product->image = $request->get('image');
-
-        $product->save();
+        $this->productRepo->updateProduct($product, $request);
 
         return redirect()->route('sviProizvodi');
     }
