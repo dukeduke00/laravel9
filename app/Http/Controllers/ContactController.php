@@ -11,11 +11,11 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
 
-    private $productRepo;
+    private $contactRepo;
 
     public function __construct()
     {
-        $this->productRepo = new ContactRepository();
+        $this->contactRepo = new ContactRepository();
 
     }
 
@@ -34,22 +34,16 @@ class ContactController extends Controller
     public function sendContact(SendContactRequest $request)
     {
 
-        $this->productRepo->createContact($request);
+        $this->contactRepo->createContact($request);
 
 
         return redirect("/shop");
     }
 
-    public function deleteContact($contact)
+    public function deleteContact(ContactModel $contact)
     {
-        $singleContact = $this->productRepo->getContactById($contact);
 
-        if($singleContact === null)
-        {
-            die("Ovaj kontakt ne postoji");
-        }
-
-        $singleContact->delete();
+        $contact->delete();
 
         return redirect()->back();
     }

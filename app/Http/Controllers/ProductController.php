@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SaveProductRequest;
 use App\Models\ProductModel;
 use App\Repositories\ProductRepository;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -35,24 +34,16 @@ class ProductController extends Controller
         return redirect()->route("sviProizvodi");
     }
 
-    public function delete($product)
+    public function delete(ProductModel $product)
     {
-        // Select * from products where id = $product LIMIT 1 (first)
-        $singleProduct = $this->productRepo->getProductById($product);
 
-
-        if($singleProduct === null)
-        {
-            die("Ovaj proizvod ne postoji");
-        }
-
-        $singleProduct->delete();
+        $product->delete();
 
         return redirect()->back();
     }
 
     // /admin/product/edit/5 -> ProductsModel::where(['id' => $product])->first()
-    public function edit( Request $request, ProductModel $product)
+    public function edit(ProductModel $product)
     {
 
         // Prikazivanje forme s trenutnim podacima proizvoda

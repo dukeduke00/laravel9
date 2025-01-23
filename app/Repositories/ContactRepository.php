@@ -24,9 +24,5 @@ class ContactRepository
 
     }
 
-    public function getContactById($id)
-    {
-        return $this->contactModel->where(['id' => $id])->first();
-    }
 }
 

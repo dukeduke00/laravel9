@@ -10,11 +10,11 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
-    private $productRepo;
+    private $homeRepo;
 
     public function __construct()
     {
-        $this->productRepo = new HomeRepository();
+        $this->homeRepo = new HomeRepository();
 
     }
     public function index()
@@ -27,7 +27,7 @@ class HomeController extends Controller
             ? 'Dobro jutro!'
             : 'Dobar dan' ;
 
-        $latestProducts =  $this->productRepo->sortProducts();
+        $latestProducts =  $this->homeRepo->sortProducts();
 
         return view("welcome", compact('trenutnoVrijeme', 'sat', 'poruka', 'latestProducts'));
     }
