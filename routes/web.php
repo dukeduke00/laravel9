@@ -30,32 +30,32 @@ Route::view("/about", "about");
 
 Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group(function () {
 
-    Route::post("/send-contact", [ContactController::class, "sendContact"]);
+    Route::controller(ContactController::class)->prefix('/contact')->group(function () {
 
-    Route::get("/all-contacts", [ContactController::class, "getAllContacts"])
-        ->name("sviKontakti");
+        Route::post("/send", 'sendContact')->name('sendContact');
 
-    Route::get("/all-products", [ProductController::class, "getAllProducts"])
-        ->name("sviProizvodi");
+        Route::get("/all", 'getAllContacts')->name('sviKontakti');
+
+        Route::get("/delete/{contact}", 'deleteContact')->name('contact.delete');
+
+
+    });
+
+    Route::controller(ProductController::class)->prefix('/products')->group(function () {
+
+        Route::get("/all", 'getAllProducts')->name('sviProizvodi');
+
+        Route::post("/save", 'addProduct')->name('snimanjeOglasa');
+
+        Route::get("/delete/{product}", 'delete')->name('obrisiProizvod');
+
+        Route::get('/edit/{product}', 'edit')->name('editProizvod');
+
+        Route::post('/save/{product}', 'update')->name('updateProizvod');
+    });
+
 
     Route::view("/add-product", "addProduct");
-
-    Route::post("/save-product", [ProductController::class, "addProduct"])
-        ->name("snimanjeOglasa");
-
-    Route::get("/delete-product/{product}", [ProductController::class, "delete"])
-        ->name("obrisiProizvod");
-
-
-    Route::get("/delete-contact/{contact}", [ContactController::class, "deleteContact"])
-        ->name("obrisiKontakt");
-
-
-    Route::get('/product/edit/{product}', [ProductController::class, 'edit'])
-        ->name('editProizvod');
-
-    Route::post('/product/save/{product}', [ProductController::class, 'update'])
-        ->name('updateProizvod');
 
 });
 

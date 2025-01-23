@@ -27,7 +27,7 @@
                 <td>{{ $contact->subject }}</td>
                 <td>{{ $contact->message }}</td>
                 <td>
-                    <a href="{{ route('obrisiKontakt', ['contact' => $contact->id]) }}" class="btn btn-danger">Delete</a>
+                    <a href="{{ route('contact.delete', ['contact' => $contact->id]) }}" class="btn btn-danger">Delete</a>
                     <a class="btn btn-primary">Edit</a>
                 </td>
             </tr>
