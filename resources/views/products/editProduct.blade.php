@@ -6,7 +6,7 @@
 
 @section('sadrzajStranice')
 
-    <form  style="margin: 100px 600px"  class=" d-flex justify-content-center gap-3 flex-column" method="POST" action="{{ route('updateProizvod', ['product' => $product->id]) }}">
+    <form  style="margin: 100px 600px"  class=" d-flex justify-content-center gap-3 flex-column" method="POST" action="{{ route('product.save', ['product' => $product->id]) }}">
 
         <div>
             @if($errors->any())

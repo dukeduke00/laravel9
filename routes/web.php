@@ -32,9 +32,9 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
 
     Route::controller(ContactController::class)->prefix('/contact')->group(function () {
 
-        Route::post("/send", 'sendContact')->name('sendContact');
+        Route::post("/send", 'sendContact')->name('contact.send');
 
-        Route::get("/all", 'getAllContacts')->name('sviKontakti');
+        Route::get("/all", 'getAllContacts')->name('contact.all');
 
         Route::get("/delete/{contact}", 'deleteContact')->name('contact.delete');
 
@@ -43,15 +43,15 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
 
     Route::controller(ProductController::class)->prefix('/products')->group(function () {
 
-        Route::get("/all", 'getAllProducts')->name('sviProizvodi');
+        Route::get("/all", 'getAllProducts')->name('product.all');
 
-        Route::post("/save", 'addProduct')->name('snimanjeOglasa');
+        Route::post("/save", 'addProduct')->name('product.create');
 
-        Route::get("/delete/{product}", 'delete')->name('obrisiProizvod');
+        Route::get("/delete/{product}", 'delete')->name('product.delete');
 
-        Route::get('/edit/{product}', 'edit')->name('editProizvod');
+        Route::get('/edit/{product}', 'edit')->name('product.edit');
 
-        Route::post('/save/{product}', 'update')->name('updateProizvod');
+        Route::post('/save/{product}', 'update')->name('product.save');
     });
 
 

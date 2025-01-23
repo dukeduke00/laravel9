@@ -9,7 +9,7 @@
 
 
 
-<form  style="margin: 100px 600px"  class=" d-flex justify-content-center gap-3 flex-column" method="POST" action="{{ route("snimanjeOglasa") }}">
+<form  style="margin: 100px 600px"  class=" d-flex justify-content-center gap-3 flex-column" method="POST" action="{{ route("product.create") }}">
 
     <div>
         @if($errors->any())

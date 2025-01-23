@@ -20,11 +20,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('sviProizvodi') }}">Svi proizvodi</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('product.all') }}">Svi proizvodi</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('sviKontakti') }}">Svi kontakti</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('contact.all') }}">Svi kontakti</a>
                 </li>
             </ul>
         </div>

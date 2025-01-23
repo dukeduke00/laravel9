@@ -28,7 +28,7 @@
     @endforeach
 
 
-<form  style="margin: 100px 600px"  class=" d-flex justify-content-center gap-3 flex-column" method="POST" action="{{route('sendContact')}}">
+<form  style="margin: 100px 600px"  class=" d-flex justify-content-center gap-3 flex-column" method="POST" action="{{route('contact.send')}}">
 
     @if($errors->any())
         <p>Greska: {{ $errors->first() }}</p>

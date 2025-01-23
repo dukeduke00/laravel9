@@ -7,7 +7,7 @@
 
 @section("sadrzajStranice")
 
-    <form class="m-5">
+    <form class="m-5" action="{{ route('contact.send') }}">
         <div class="mb-3">
             <label  class="form-label">Email address</label>
             <input type="email" name="email" class="form-control"  aria-describedby="emailHelp">
