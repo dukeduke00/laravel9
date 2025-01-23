@@ -30,28 +30,28 @@ Route::view("/about", "about");
 
 Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group(function () {
 
-    Route::controller(ContactController::class)->prefix('/contact')->group(function () {
+    Route::controller(ContactController::class)->prefix('/contact')->name('contact.')->group(function () {
 
-        Route::post("/send", 'sendContact')->name('contact.send');
+        Route::post("/send", 'sendContact')->name('send');
 
-        Route::get("/all", 'getAllContacts')->name('contact.all');
+        Route::get("/all", 'getAllContacts')->name('all');
 
-        Route::get("/delete/{contact}", 'deleteContact')->name('contact.delete');
+        Route::get("/delete/{contact}", 'deleteContact')->name('delete');
 
 
     });
 
-    Route::controller(ProductController::class)->prefix('/products')->group(function () {
+    Route::controller(ProductController::class)->prefix('/products')->name('product.')->group(function () {
 
-        Route::get("/all", 'getAllProducts')->name('product.all');
+        Route::get("/all", 'getAllProducts')->name('all');
 
-        Route::post("/save", 'addProduct')->name('product.create');
+        Route::post("/save", 'addProduct')->name('create');
 
-        Route::get("/delete/{product}", 'delete')->name('product.delete');
+        Route::get("/delete/{product}", 'delete')->name('delete');
 
-        Route::get('/edit/{product}', 'edit')->name('product.edit');
+        Route::get('/edit/{product}', 'edit')->name('edit');
 
-        Route::post('/save/{product}', 'update')->name('product.save');
+        Route::post('/save/{product}', 'update')->name('save');
     });
 
 

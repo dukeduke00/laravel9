@@ -31,7 +31,7 @@ class ProductController extends Controller
 
         $this->productRepo->createNew($request);
 
-        return redirect()->route("sviProizvodi");
+        return redirect()->route("product.all");
     }
 
     public function delete(ProductModel $product)
@@ -55,7 +55,7 @@ class ProductController extends Controller
 
         $this->productRepo->updateProduct($product, $request);
 
-        return redirect()->route('sviProizvodi');
+        return redirect()->route('product.all');
     }
 
 }
