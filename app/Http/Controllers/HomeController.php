@@ -6,6 +6,7 @@ use App\Models\ProductModel;
 use App\Repositories\HomeRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -28,6 +29,9 @@ class HomeController extends Controller
             : 'Dobar dan' ;
 
         $latestProducts =  $this->homeRepo->sortProducts();
+
+
+
 
         return view("welcome", compact('trenutnoVrijeme', 'sat', 'poruka', 'latestProducts'));
     }

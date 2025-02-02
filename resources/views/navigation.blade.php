@@ -26,6 +26,10 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('contact.all') }}">Svi kontakti</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('cart.all') }}">Korpa</a>
+                </li>
             </ul>
         </div>
     </div>

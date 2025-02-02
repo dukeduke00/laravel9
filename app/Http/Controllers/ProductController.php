@@ -24,6 +24,10 @@ class ProductController extends Controller
         return view("product", compact("allProducts"));
     }
 
+    public function permalink(ProductModel $product)
+    {
+        return view("products.singleProduct", compact("product"));
+    }
 
 
     public function addProduct(SaveProductRequest $request)
@@ -57,5 +61,7 @@ class ProductController extends Controller
 
         return redirect()->route('product.all');
     }
+
+
 
 }

@@ -10,7 +10,9 @@
 
 
     @foreach($allProducts as $product)
+        <a href="{{ route('product.single', $product->id) }}">
         {{ $product->name }}
+        </a>
         <br>
         {{ $product->description }}
         <br>
