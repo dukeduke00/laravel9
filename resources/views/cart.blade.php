@@ -3,16 +3,12 @@
 @section("sadrzajStranice")
 
 
- @foreach($products as $product)
-     @foreach($cart as $item)
-         @if($item['product_id'] == $product->id)
-             <p>Ime proizvoda: {{ $product->name }}</p>
-             <p>Kolicina: {{ $item['amount'] }}</p>
-         @endif
-     @endforeach
-
-
-
+ @foreach($combinedItems as $item)
+     <p>Ime: {{ $item['name'] }}</p>
+     <p>Kolicina: {{ $item['amount'] }}</p>
+     <p>Cijena: {{ $item['price'] }}</p>
+     <p>Ukupna cijena: {{ $item['total'] }}</p>
+     <hr>
  @endforeach
 
 @endsection
